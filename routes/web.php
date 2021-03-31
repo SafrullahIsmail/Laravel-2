@@ -25,4 +25,6 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-// Test git
+Route::prefix('admin')->group(function (){
+    Route::get('/dashboard', 'AdminController@dashboard')->name('adminDashboard');
+});
