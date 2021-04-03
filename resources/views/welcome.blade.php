@@ -23,7 +23,7 @@
 
         @foreach($posts as $post)
         <div class="post-preview">
-          <a href="post.html">
+          <a href="{{ route('singlePost', $post->id) }}">
             <h2 class="post-title">
               {{ $post->title }}
             </h2>

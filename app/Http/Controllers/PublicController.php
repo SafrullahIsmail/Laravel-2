@@ -14,9 +14,10 @@ class PublicController extends Controller
         return view('welcome', ['posts' => $posts]);
     }
 
-    public function singlePost()
+    public function singlePost($id)
     {
-        return view('singlePost');
+        $post = Post::find($id);
+        return view('singlePost', ['post' => $post]);
     }
 
     public function about()
