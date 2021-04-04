@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use App\Http\Requests\CreatePost;
+use App\Http\Requests\UserUpdate;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -31,7 +33,7 @@ class AdminController extends Controller
         return view('admin.editFormPost', ['post' => $post]);
     }
 
-    public function edit(CreatePost $request, $id)
+    public function editPost(CreatePost $request, $id)
     {
         $post = Post::where('id', $id)->first();
         $post->title = $request['title'];
@@ -41,7 +43,7 @@ class AdminController extends Controller
         return back()->with('success', 'Post updated successfully');
     }
 
-    public function delete($id)
+    public function deletePost($id)
     {
         $post = Post::where('id', $id)->first();
         $post->delete();
@@ -65,6 +67,37 @@ class AdminController extends Controller
 
     public function users()
     {
-        return view('admin.users');
+        $users = User::all();
+        return view('admin.users', ['users' => $users]);
+    }
+
+    public function userEdit($id)
+    {
+        $user = User::where('id', $id)->first();
+        return view('admin.editFormUser', ['user' => $user]);
+    }
+
+    public function editUser(UserUpdate $request, $id)
+    {
+        $user = User::where('id', $id)->first();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        if($request['author'] == 1){
+            $user->author = true;
+        }
+        if($request['admin'] == 1){
+            $user->admin = true;
+        }
+        $user->save();
+
+        return back()->with('success', 'User update successfully');
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::where('id', $id)->first();
+        $user->delete();
+
+        return back();
     }
 }
