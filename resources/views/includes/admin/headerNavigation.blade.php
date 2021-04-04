@@ -3,8 +3,8 @@
         <i class="fa fa-bars"></i>
     </a>
 
-    <a class="navbar-brand" href="#">
-        <img src="{{ asset('admin/assets/imgs/logo.png') }}" alt="logo">
+    <a class="navbar-brand d-flex justify-content-center" href="{{ route('index') }}">
+        <img src="{{ asset('admin/assets/imgs/laravel.png') }}" width="40" height="40" alt="logo"> <h2 style="color: #ee635c; margin-left: 5px;">Blog</h2>
     </a>
 
     <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
