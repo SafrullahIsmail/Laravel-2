@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,7 +24,16 @@ class AdminController extends Controller
 
     public function comments()
     {
-        return view('admin.comments');
+        $comments = Comment::all();
+        return view('admin.comments', ['comments' => $comments]);
+    }
+
+    public function deleteComment($id)
+    {
+        $comment = Comment::where('id', $id)->first();
+        $comment->delete();
+
+        return back();
     }
 
     public function users()

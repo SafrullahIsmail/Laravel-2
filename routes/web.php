@@ -49,5 +49,6 @@ Route::prefix('admin')->group(function (){
     Route::get('dashboard', 'AdminController@dashboard')->name('adminDashboard');
     Route::get('posts', 'AdminController@posts')->name('adminPosts');
     Route::get('comments', 'AdminController@comments')->name('adminComments');
+        Route::post('comment/{id}/delete', 'AdminController@deleteComment')->name('adminDeleteComment');
     Route::get('users', 'AdminController@users')->name('adminUsers');
 });

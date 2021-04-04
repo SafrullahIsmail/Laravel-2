@@ -22,10 +22,8 @@ class UserController extends Controller
 
     public function deleteComment($id)
     {
-        $comment = Comment::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if($comment){
-            $comment->delete();
-        }
+        $comment = Comment::where('id', $id)->where('user_id', Auth::user()->id)->first();        
+        $comment->delete();        
         return back();
     }
 
