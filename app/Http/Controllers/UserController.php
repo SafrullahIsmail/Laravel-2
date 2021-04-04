@@ -34,6 +34,7 @@ class UserController extends Controller
 
         return view('user.dashboard', ['chart' => $chart]);
     }
+    
     private function generateDateRange(Carbon $start_date, Carbon $end_date)
     {
         $dates = [];
