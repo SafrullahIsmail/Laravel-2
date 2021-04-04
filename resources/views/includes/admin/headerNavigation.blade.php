@@ -12,7 +12,9 @@
     </a>
 
     <ul class="navbar-nav ml-auto">
-        
+            @if(Auth::user()->author == true)
+                <a href="{{ route('newPost') }}" class="btn btn-primary" style="margin-right: 20px;">New Post</a>
+            @endif
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{ asset('admin/assets/imgs/avatar-1.png') }}" class="avatar avatar-sm" alt="logo">
