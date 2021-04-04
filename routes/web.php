@@ -70,6 +70,7 @@ Route::prefix('admin')->group(function (){
         Route::post('product/new', 'AdminController@newProductPost')->name('adminNewProductPost');
         Route::get('product/{id}/edit', 'AdminController@editProduct')->name('adminEditProduct');
         Route::post('product/{id}/edit', 'AdminController@editProductPost')->name('adminEditProductPost');
+        Route::post('product/{id}/delete', 'AdminController@deleteProduct')->name('adminDeleteProduct');
 });
 
 Route::prefix('shop')->group(function (){
