@@ -6,7 +6,7 @@
     <div class="content">
         <div class="card">
             <div class="card-header bg-light">
-                User Comments
+                Author Posts
             </div>
 
             <div class="card-body">
