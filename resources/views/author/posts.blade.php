@@ -31,9 +31,8 @@
                                 <td>{{ \Carbon\Carbon::parse($post->updated_at)->diffForHumans() }}</td>
                                 <td>{{ $post->comments->count() }}</td>
                                 <td>
-                                    <a href="{{ route('postEdit', $post->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('deletePost', $post->id) }}" id="deletePost-{{ $post->id }}" method="post" style="display:none;">@csrf</form>
-                                    <a href="#" onclick="document.getElementById('deletePost-{{ $post->id }}').submit()" class="btn btn-danger">Remove</a>
+                                    <a href="{{ route('postEdit', $post->id) }}" class="btn btn-warning">Edit</a>                                    
+                                    <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePostModal-{{ $post->id }}">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -43,4 +42,27 @@
             </div>
         </div>
     </div>
+
+    @foreach(Auth::user()->posts as $post)
+        <div class="modal fade" id="deletePostModal-{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Are you sure</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        Delete this {{ $post->title }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No, keep it</button>
+                        <form action="{{ route('deletePost', $post->id) }}" id="deletePost-{{ $post->id }}" method="post">@csrf
+                            <button type="submit" class="btn btn-primary">Yes, delete it</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 @endsection

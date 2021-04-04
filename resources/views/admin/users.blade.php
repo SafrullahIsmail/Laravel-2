@@ -36,8 +36,7 @@
                                 <td>{{ \Carbon\Carbon::parse($user->updated_at)->diffForHumans() }}</td>                                
                                 <td>
                                     <a href="{{ route('adminUserEdit', $user->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('adminDeleteUser', $user->id) }}" id="deleteUser-{{ $user->id }}" method="post" style="display:none;">@csrf</form>
-                                    <a href="#" onclick="document.getElementById('deleteUser-{{ $user->id }}').submit()" class="btn btn-danger">Remove</a>
+                                    <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal-{{ $user->id }}">Remove</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -47,4 +46,27 @@
             </div>
         </div>
     </div>
+
+    @foreach($users as $user)
+        <div class="modal fade" id="deleteUserModal-{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Are you sure</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        Delete this user {{ $user->name }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No, keep it</button>
+                        <form action="{{ route('adminDeleteUser', $user->id) }}" id="deleteUser-{{ $user->id }}" method="post">@csrf
+                            <button type="submit" class="btn btn-primary">Yes, delete it</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 @endsection
