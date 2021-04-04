@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Charts\DashboardChart;
 use App\Comment;
 use App\Post;
+use App\Product;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\UserUpdate;
 use App\User;
@@ -131,7 +132,8 @@ class AdminController extends Controller
 
     public function products()
     {
-        
+        $products = Product::all();
+        return view('admin.products', ['products' => $products]);
     }
 
     public function newProduct()
